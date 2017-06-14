@@ -5,20 +5,34 @@ class Game
 	def initialize
 		@turn = 0
 		@turn_marker = 'x'
-		@board = [['-','-','-'], ['-','-','-'], ['-','-','-']]
+		@board = Board.new
 	end
 
 	def play(x, y)
-		if  check_empty_tile(x, y)
-			return 'Tile already taken. Please choose another.' 
-		else
-			@board[y][x] = @turn_marker
+		if check_empty_tile(x, y) 
+			return tile_taken
+		else 
+			place_marker(x,y)
 		end
 		if check_win 
-			"Player #{@turn + 1} wins!" 
+			"Player #{@turn + 1} wins!"
 		else
 			turn_switch
 		end
+	end
+
+	def check_win
+		check_rows || check_columns || check_diagonals
+	end
+
+	private
+
+	def place_marker(x, y)
+		@board[y][x] = @turn_marker
+	end
+
+	def tile_taken
+		'Tile already taken. Please choose another.'
 	end
 
 	def check_empty_tile(x, y)
@@ -33,10 +47,6 @@ class Game
 
 	def turn_marker
 		@turn == 0 ? @turn_marker = 'x' : @turn_marker = 'o'
-	end
-
-	def check_win
-		check_rows || check_columns || check_diagonals
 	end
 
 	def check_rows

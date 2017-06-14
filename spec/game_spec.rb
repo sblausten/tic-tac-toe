@@ -30,19 +30,6 @@ describe 'game' do
 			expect(game.turn).to eq(1)
 		end	
 	end
-	describe 'turn_marker' do
-		it 'switches to "o" after first turn' do
-			game = Game.new
-			game.play(0, 0)
-			expect(game.turn_marker).to eq('o')
-		end
-		it 'switches back to "x" after second turn' do
-			game = Game.new
-			game.play(0, 0)
-			game.play(1, 0)
-			expect(game.turn_marker).to eq('x')
-		end
-	end
 	describe 'check_win' do
 		before(:each) do
 			@game = Game.new
