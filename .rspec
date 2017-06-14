@@ -1,2 +1,2 @@
--p -c
+-c
 --require spec_helper

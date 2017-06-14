@@ -30,6 +30,19 @@ describe 'game' do
 			expect(game.turn).to eq(1)
 		end	
 	end
+	describe 'turn_marker' do
+		it 'switches to "o" after first turn' do
+			game = Game.new
+			game.play(0, 0)
+			expect(game.turn_marker).to eq('o')
+		end
+		it 'switches back to "x" after second turn' do
+			game = Game.new
+			game.play(0, 0)
+			game.play(1, 0)
+			expect(game.turn_marker).to eq('x')
+		end
+	end
 	describe 'check_win' do
 		before(:each) do
 			@game = Game.new
@@ -39,12 +52,25 @@ describe 'game' do
 			expect(@game.check_win).to eq(true)
 		end
 		it 'returns true if three of a kind in any column' do
-			win_with_x_column
+			win_with_o_column
+			expect(@game.check_win).to eq(true)
+		end
+		it 'returns true if three of a kind in a diagonal' do
+			win_with_x_diagonal_lr
 			expect(@game.check_win).to eq(true)
 		end
 		it 'returns false if no valid winning pattern' do
 			@game.play(0, 0)
 			@game.play(0, 1)
+			expect(@game.check_win).to eq(false)
+		end
+		it 'returns false if no valid winning pattern with 3 rounds' do
+			@game.play(0, 0)
+			@game.play(0, 2)
+			@game.play(0, 1)
+			@game.play(1, 1)
+			@game.play(2, 2)
+			@game.play(1, 0)
 			expect(@game.check_win).to eq(false)
 		end
 	end
