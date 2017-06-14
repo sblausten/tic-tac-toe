@@ -5,7 +5,7 @@ class Game
 	def initialize
 		@turn = 0
 		@turn_marker = 'x'
-		@board = Board.new
+		@board = [['-','-','-'], ['-','-','-'], ['-','-','-']]
 	end
 
 	def play(x, y)
