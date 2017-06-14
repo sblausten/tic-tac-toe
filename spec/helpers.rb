@@ -56,12 +56,4 @@ module Helpers
 		@game.play(2, 0)
 	end
 
-	def win_with_x_diagonal_rl
-		
-	end
-
-	def win_with_o_diagonal_rl
-		
-	end
-
 end
